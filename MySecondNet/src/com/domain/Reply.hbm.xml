@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.domain">
+
+	<class name="Reply" table="Reply">
+		<id name="id">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="description" />
+		<!-- 用户可以多次评论 -->
+		
+		<many-to-one name="user" column="user_id"></many-to-one>
+		
+		<!--一件商品可以有多次回复  -->
+	     <many-to-one name="product" column="product_id"/>
+
+	</class>
+
+</hibernate-mapping>
+

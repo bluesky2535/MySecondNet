@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.domain">
+
+	<class name="Order" table="order_">
+		<id name="oid">
+		
+		</id>
+		<property name="total" />
+		<property name="dateTime" />
+		<property name="status" />
+			<property name="name" />
+			<property name="addr" />
+				<property name="phone" />
+		<!--订单和购买者的关系是多对一  -->
+		<many-to-one name="buyer" column="buyer_id" lazy="false" cascade="save-update"></many-to-one>
+		
+		<!--订单和出售者的关系是多对一  -->
+		<many-to-one name="seller" column="seller_id" lazy="false" cascade="save-update"></many-to-one>
+		<!--订单和订单项是一对多的关系  -->
+	    <set name="orderitems" cascade="save-update">
+			<key column="order_id"  />
+			<one-to-many class="OrderItem"   />
+		</set> 
+		
+		<many-to-one name="midOrder" column="midorder_id"  lazy="false"  cascade="save-update"></many-to-one>
+ 
+
+	</class>
+
+</hibernate-mapping>
+

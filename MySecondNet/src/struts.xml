@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+
+	<package name="product" namespace="/" extends="struts-default">
+
+		<global-results>
+			<result name="msg">/WEB-INF/Front/msg.jsp</result>
+			<result name="loginUI">/WEB-INF/Front/login.jsp</result>
+		</global-results>
+		<!-- 首页的action -->
+		<action name="index" class="indexAction">
+			<result name="index">/WEB-INF/Front/index.jsp</result>
+		</action>
+
+
+		<!--产品的配置 -->
+		<action name="product_*" class="productAction" method="{1}">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">
+					image/bmp,image/png,image/gif,image/jpeg,image/pjpeg
+				</param>
+			</interceptor-ref>
+			<!-- 默认的拦截器，必须要写 -->
+			<interceptor-ref name="defaultStack" />
+			<result name="findbycid">/WEB-INF/Front/showProducts.jsp</result>
+			<result name="findbycsid">/WEB-INF/Front/showProducts.jsp</result>
+			<result name="addUI">/WEB-INF/Front/addProduct.jsp</result>
+			<result name="addSuccess" type="redirectAction">index</result>
+			<result name="delete" type="redirectAction">index</result>
+			<result name="updateUI">/WEB-INF/Front/updateProduct.jsp</result>
+			<result name="updateSuccess" type="redirectAction">index</result>
+			<result name="showProduct">/WEB-INF/Front/product.jsp</result>
+			<result name="replysuccess">/WEB-INF/Front/reply.jsp</result>
+
+		</action>
+		<!-- 验证码的Action -->
+		<action name="checkImg" class="checkImgAction"></action>
+
+		<!-- 购物车的Action -->
+		<action name="cart_*" class="cartAction" method="{1}">
+			<result name="addCart">/WEB-INF/Front/cart.jsp</result>
+			<result name="clearCart">/WEB-INF/Front/cart.jsp</result>
+			<result name="removeCart">/WEB-INF/Front/cart.jsp</result>
+			<result name="myCart">/WEB-INF/Front/cart.jsp</result>
+			<result name="addCartFail">/WEB-INF/Front/cart.jsp</result>
+		</action>
+
+		<!-- 订单的Action -->
+		<action name="order_*" class="orderAction" method="{1}">
+			<result name="saveOrder1">/WEB-INF/Front/order.jsp</result>
+			<result name="saveOrder" type="redirectAction">order_saveOrder1</result>
+			<result name="findByUid">/WEB-INF/Front/orderList.jsp</result>
+			<result name="findByOid">/WEB-INF/Front/order.jsp</result>
+			<result name="updateStateSuccess" type="redirectAction">order_findByUid.action?page=1
+			</result>
+		</action>
+		
+		<!-- 中转订单的Action -->
+		<action name="midOrder_*" class="orderAction" method="{1}">
+			<result name="saveOrder1">/WEB-INF/Front/order.jsp</result>
+			<result name="saveOrder" type="redirectAction">order_saveOrder1</result>
+			<result name="findByUid">/WEB-INF/Front/orderList.jsp</result>
+			<result name="findByOid">/WEB-INF/Front/order.jsp</result>
+			<result name="updateStateSuccess" type="redirectAction">order_findByUid.action?page=1
+			</result>
+		</action>
+
+		<!--用户的配置 -->
+		<action name="user_*" class="UserAction" method="{1}">
+			<result name="quitSuccess" type="redirectAction">index</result>
+			<result name="loginSuccess" type="redirectAction">index</result>
+			<result name="registUI">/WEB-INF/Front/regist.jsp</result>
+			<result name="registSuccess">/WEB-INF/Front/registSuccess.jsp</result>
+			<result name="activeSuccess">/WEB-INF/Front/activeSuccess.jsp</result>
+			<result name="activeSuc" type="redirectAction">index</result>
+		</action>
+
+
+	</package>
+
+</struts>

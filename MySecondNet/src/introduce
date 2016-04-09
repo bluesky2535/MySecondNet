@@ -1,0 +1,13 @@
+实现了查询数据并显示在页面
+
+
+
+失败
+
+代理类的声明式事务管理失败！！！
+
+
+1.在web.xml加上openviewfilter
+3.在service层注入Dao层需要@resourse，并且需要在该接口加上@compount
+4.在DaoImpl类中虽然实现了Dao层，但是@compount是不会继承的，所以需要在DaoImpl类中加入@compount
+5.遍历集合，和map

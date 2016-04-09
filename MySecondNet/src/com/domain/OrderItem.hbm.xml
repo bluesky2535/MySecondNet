@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.domain">
+
+	<class name="OrderItem" table="orderitem">
+		<id name="itemid">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="subtotal" />
+		<property name="count" />
+
+	<!-- 和产品是多对一 -->	
+<many-to-one name="product" lazy="false" column="product_id" class="Product"></many-to-one>
+		<!--和订单是多对一  -->
+		
+		<!--  -->
+<many-to-one name="order" lazy="false"  cascade="save-update" column="order_id"></many-to-one>
+
+	</class>
+
+</hibernate-mapping>
+

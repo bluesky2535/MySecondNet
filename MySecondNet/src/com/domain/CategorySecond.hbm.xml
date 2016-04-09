@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.domain">
+
+	<class name="CategorySecond" table="CategorySecond">
+		<id name="id">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="name" />
+		
+		
+		
+		<many-to-one name="category" column="Category_ID" class="Category"
+			not-null="true">
+	    </many-to-one>
+
+        <!--二级分类与产品是一对多  -->
+		<set name="products" cascade="save-update">
+			<key column="categorySecond_ID" />
+			<one-to-many class="Product" />
+		</set>
+	</class>
+
+</hibernate-mapping>
+

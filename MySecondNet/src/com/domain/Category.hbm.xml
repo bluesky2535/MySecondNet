@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.domain">
+
+	<class name="Category" table="category">
+		<id name="id">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="name" />
+		
+		
+		<!--一级分类和二级分类是一对多的关系  -->
+	    <set name="categorySeconds"  lazy="false">
+			<key column="category_id" />
+			<one-to-many class="CategorySecond"  />
+		</set> 
+
+
+	</class>
+
+</hibernate-mapping>
+

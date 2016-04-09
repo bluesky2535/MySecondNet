@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.domain">
+
+	<class name="User" table="User">
+		<id name="id">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="name"  unique="true"/>
+		<property name="password" />
+		<property name="email" />
+		<property name="islive" />
+		<property name="type" />
+		<property name="activecode" />
+		<property name="addr" />
+		<property name="phone" />
+		<!-- 用户的销售订单 -->
+		<set name="sellorders" cascade="save-update">
+			<key column="seller_id"></key>
+			<one-to-many class="Order" />
+		</set>
+		<!-- 用户的购买订单 -->
+		<set name="buyorders" cascade="save-update">
+			<key column="buyer_id"></key>
+			<one-to-many class="Order" />
+		</set>
+		<!--用户上传的产品 -->
+		<set name="uploadproducts" cascade="save-update">
+			<key column="user_id"></key>
+			<one-to-many class="Product" />
+		</set>
+	</class>
+
+</hibernate-mapping>
+

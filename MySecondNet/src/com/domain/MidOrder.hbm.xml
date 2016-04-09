@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.domain">
+
+	<class name="MidOrder" table="midOrder">
+		<id name="midOid">
+		</id>
+	
+		<!--订单和订单项是一对多的关系  -->
+	    <set name="orders" cascade="save-update">
+			<key column="Order_id"  />
+			<one-to-many class="Order" />
+		</set> 
+		
+		
+ 
+
+	</class>
+
+</hibernate-mapping>
+
